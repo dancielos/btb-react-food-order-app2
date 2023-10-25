@@ -2,13 +2,14 @@ import Header from './components/Header';
 import Meals from './components/Meals';
 import { createPortal } from 'react-dom';
 import Modal from './UI/Modal';
-import CartItems from './components/CartItems';
+import Cart from './components/Cart';
 import CheckoutForm from './components/CheckoutForm';
+import CartProvider from './store/CartProvider';
 
 function App() {
 	// console.log('App');
 	return (
-		<>
+		<CartProvider>
 			<Header />
 			<Meals />
 			{/* {createPortal(
@@ -23,7 +24,7 @@ function App() {
 				</Modal>,
 				document.getElementById('modal')
 			)} */}
-		</>
+		</CartProvider>
 	);
 }
 

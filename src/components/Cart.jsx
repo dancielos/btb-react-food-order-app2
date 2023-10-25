@@ -1,6 +1,6 @@
 import CartItem from './CartItem';
 
-const CartItems = function (props) {
+const Cart = function (props) {
 	return (
 		<>
 			<ul>
@@ -21,4 +21,4 @@ const CartItems = function (props) {
 	);
 };
 
-export default CartItems;
+export default Cart;

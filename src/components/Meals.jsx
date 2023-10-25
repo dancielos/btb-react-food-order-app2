@@ -1,6 +1,8 @@
 import MealItem from './MealItem';
 import fetchAvailableMeals from '../util/http';
 import { useFetch } from '../hooks/useFetch';
+import CartContext from '../store/cart-context';
+import { useContext } from 'react';
 
 const Meals = function (props) {
 	const {
@@ -8,6 +10,10 @@ const Meals = function (props) {
 		isFetching,
 		errorFetching,
 	} = useFetch(fetchAvailableMeals, []);
+
+	const cartCtx = useContext(CartContext);
+
+	console.log(cartCtx);
 
 	return (
 		<section>
@@ -19,7 +25,13 @@ const Meals = function (props) {
 				{!isFetching &&
 					!errorFetching &&
 					availableMeals.map((meal) => {
-						return <MealItem key={meal.id} {...meal} />;
+						return (
+							<MealItem
+								key={meal.id}
+								onAddToCart={() => cartCtx.addItem(meal)}
+								{...meal}
+							/>
+						);
 					})}
 			</ul>
 		</section>
