@@ -1,6 +1,10 @@
+import { useContext } from 'react';
 import logo from '../assets/logo.jpg';
+import CartContext from '../store/cart-context';
 
 const Header = function (props) {
+	const cartCtx = useContext(CartContext);
+
 	return (
 		<header id='main-header'>
 			<div id='title'>
@@ -8,9 +12,9 @@ const Header = function (props) {
 				<h1>Order Up!</h1>
 			</div>
 			<nav>
-				<a href='#' className='cart-btn'>
-					Cart (n)
-				</a>
+				<button className='cart-btn' onClick={props.onOpenCart}>
+					Cart ({cartCtx.totalQuantity})
+				</button>
 			</nav>
 		</header>
 	);

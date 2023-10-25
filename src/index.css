@@ -262,7 +262,19 @@ h1 {
 	color: #ffab04;
 }
 
+/* #modal {
+	width: 100vw;
+	height: 100vh;
+	display: block;
+	position: absolute;
+} */
+
 .modal {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+
 	background-color: #e4ddd4;
 	color: #312c1d;
 	border-radius: 6px;
@@ -271,14 +283,31 @@ h1 {
 	padding: 1rem;
 	width: 80%;
 	max-width: 40rem;
-	animation: fade-slide-up 0.3s ease-out forwards;
+
+	/* animation: 0.3s ease-out forwards; */
+}
+
+/* ::backdrop {
+	--color-backdrop: red;
 }
 
 .modal::backdrop {
-	background-color: rgba(0, 0, 0, 0.55);
+	content: ''; 
+	background: var(--color-backdrop);
+} */
+
+.backdrop {
+	position: absolute;
+	content: '';
+
+	width: 100vw;
+	height: 100vh;
+	top: 0;
+	left: 0;
+	background-color: rgba(0, 0, 0, 0.6);
 }
 
-@keyframes fade-slide-up {
+/* @keyframes fade-slide-up {
 	from {
 		opacity: 0;
 		transform: translateY(4rem);
@@ -288,4 +317,8 @@ h1 {
 		opacity: 1;
 		transform: translateY(0);
 	}
+} */
+
+.hidden {
+	display: none;
 }

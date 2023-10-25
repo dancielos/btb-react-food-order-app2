@@ -5,25 +5,63 @@ import Modal from './UI/Modal';
 import Cart from './components/Cart';
 import CheckoutForm from './components/CheckoutForm';
 import CartProvider from './store/CartProvider';
+import { useState } from 'react';
 
 function App() {
-	// console.log('App');
+	const [openCartModal, setOpenCartModal] = useState(false);
+	const [openCheckoutModal, setOpenCheckoutModal] = useState(false);
+
+	//TODO
+	//6. Get data from form
+	//7. Validate data using onChange, onBlur, and onSubmit
+	//8. save to /order backend
+	//9. Optimize: for instance, the page re-evaluates when I close the modal
+	const handleOpenCart = function () {
+		setOpenCartModal(true);
+	};
+
+	const handleCloseCart = function () {
+		setOpenCartModal(false);
+	};
+
+	const handleOpenCheckoutModal = function () {
+		setOpenCartModal(false);
+		setOpenCheckoutModal(true);
+	};
+
+	const handleCloseCheckoutModal = function () {
+		setOpenCheckoutModal(false);
+	};
+
 	return (
 		<CartProvider>
-			<Header />
+			<Header onOpenCart={handleOpenCart} />
 			<Meals />
-			{/* {createPortal(
-				<Modal label='Your Cart' classes='cart' buttonText='Go to checkout'>
-					<CartItems />
+			{createPortal(
+				<Modal
+					label='Your Cart'
+					className='cart'
+					openModal={openCartModal}
+					onCloseModal={handleCloseCart}
+					buttonText='Go to Checkout'
+					onCtaClick={handleOpenCheckoutModal}
+				>
+					<Cart />
 				</Modal>,
 				document.getElementById('modal')
 			)}
+
 			{createPortal(
-				<Modal label='Checkout' buttonText='Submit order'>
+				<Modal
+					label='Checkout'
+					openModal={openCheckoutModal}
+					onCloseModal={handleCloseCheckoutModal}
+					buttonText='Submit order'
+				>
 					<CheckoutForm />
 				</Modal>,
 				document.getElementById('modal')
-			)} */}
+			)}
 		</CartProvider>
 	);
 }

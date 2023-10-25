@@ -1,5 +1,5 @@
 import MealItem from './MealItem';
-import fetchAvailableMeals from '../util/http';
+import { fetchAvailableMeals } from '../util/http';
 import { useFetch } from '../hooks/useFetch';
 import CartContext from '../store/cart-context';
 import { useContext } from 'react';
