@@ -5,10 +5,10 @@ import { isEmpty, isEmail } from '../util/validator';
 import { updateUserOrder } from '../util/http';
 
 const initialOrderState = {
-	fullName: '',
+	name: '',
 	email: '',
 	street: '',
-	postalCode: '',
+	['postal-code']: '',
 	city: '',
 };
 
@@ -47,14 +47,14 @@ const CheckoutForm = function (props) {
 	const [isInputValid, setIsInputValid] = useState(validateInputs(orderState));
 
 	// console.log(isInputValid);
-	useEffect(() => {
-		setOrderState((prevState) => ({
-			...prevState,
-			numberOfItems: cartCtx.totalQuantity,
-			totalPrice: cartCtx.totalPrice,
-			items: cartCtx.items,
-		}));
-	}, []);
+	// useEffect(() => {
+	// 	setOrderState((prevState) => ({
+	// 		...prevState,
+	// 		numberOfItems: cartCtx.totalQuantity,
+	// 		totalPrice: cartCtx.totalPrice,
+	// 		items: cartCtx.items,
+	// 	}));
+	// }, []);
 
 	useEffect(() => {
 		setIsInputValid(validateInputs(orderState));
@@ -78,7 +78,8 @@ const CheckoutForm = function (props) {
 			//if even if one input is invalid...
 			console.log('Invalid form.');
 		} else {
-			updateUserOrder(orderState);
+			console.log({ customer: orderState, items: cartCtx.items });
+			updateUserOrder({ customer: orderState, items: cartCtx.items });
 		}
 		// console.log(orderState);
 	};
@@ -89,17 +90,15 @@ const CheckoutForm = function (props) {
 			<form onSubmit={handleSubmitOrder} className='control'>
 				<Input
 					label='Full name'
-					id='fullName'
-					name='fullName'
+					id='name'
+					name='name'
 					type='text'
-					onChange={(e) => handleInputChange('fullName', e.target.value)}
-					onBlur={(e) => handleInputBlur('fullName', e.target.value)}
+					onChange={(e) => handleInputChange('name', e.target.value)}
+					onBlur={(e) => handleInputBlur('name', e.target.value)}
 					hasError={
-						!isInputValid.fullName &&
-						didEdit.fullName &&
-						'Full name is required.'
+						!isInputValid.name && didEdit.name && 'Full name is required.'
 					}
-					value={orderState.fullName}
+					value={orderState.name}
 					required
 				/>
 				<Input
@@ -129,17 +128,17 @@ const CheckoutForm = function (props) {
 				<div className='one-row'>
 					<Input
 						label='Postal code'
-						id='postalCode'
-						name='postalCode'
+						id='postal-code'
+						name='postal-code'
 						type='text'
-						onChange={(e) => handleInputChange('postalCode', e.target.value)}
-						onBlur={(e) => handleInputBlur('postalCode', e.target.value)}
+						onChange={(e) => handleInputChange('postal-code', e.target.value)}
+						onBlur={(e) => handleInputBlur('postal-code', e.target.value)}
 						hasError={
-							!isInputValid.postalCode &&
-							didEdit.postalCode &&
+							!isInputValid['postal-code'] &&
+							didEdit['postal-code'] &&
 							'Postal code is required.'
 						}
-						value={orderState.postalCode}
+						value={orderState['postal-code']}
 						required
 					/>
 					<Input

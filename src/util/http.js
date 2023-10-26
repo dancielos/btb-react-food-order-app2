@@ -11,10 +11,15 @@ export const fetchAvailableMeals = async function () {
 	return resData;
 };
 
-export const updateUserOrder = async function (orders) {
+export const updateUserOrder = async function ({ items, customer }) {
 	const response = await fetch('http://localhost:3000/orders', {
-		method: 'PUT',
-		body: JSON.stringify({ orders }),
+		method: 'POST',
+		body: JSON.stringify({
+			order: {
+				items,
+				customer,
+			},
+		}),
 		headers: {
 			'Content-Type': 'application/json',
 		},
