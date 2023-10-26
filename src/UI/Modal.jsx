@@ -6,6 +6,7 @@ const Modal = function ({
 	buttonText,
 	onCloseModal,
 	onCtaClick,
+	modalActions,
 }) {
 	return (
 		<>
@@ -16,14 +17,16 @@ const Modal = function ({
 			<div className={`modal ${className || ''} ${!openModal ? 'hidden' : ''}`}>
 				<h2>{label}</h2>
 				{children}
-				<div className='modal-actions'>
-					<button className='text-button' onClick={onCloseModal}>
-						Close
-					</button>
-					<button className='button' onClick={onCtaClick}>
-						{buttonText}
-					</button>
-				</div>
+				{modalActions && (
+					<div className='modal-actions'>
+						<button className='text-button' onClick={onCloseModal}>
+							Close
+						</button>
+						<button className='button' onClick={onCtaClick}>
+							{buttonText}
+						</button>
+					</div>
+				)}
 			</div>
 		</>
 	);

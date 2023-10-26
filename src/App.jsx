@@ -12,7 +12,6 @@ function App() {
 	const [openCheckoutModal, setOpenCheckoutModal] = useState(false);
 
 	//TODO
-	//6. Get data from form
 	//7. Validate data using onChange, onBlur, and onSubmit
 	//8. save to /order backend
 	//9. Optimize: for instance, the page re-evaluates when I close the modal
@@ -37,31 +36,35 @@ function App() {
 		<CartProvider>
 			<Header onOpenCart={handleOpenCart} />
 			<Meals />
-			{createPortal(
-				<Modal
-					label='Your Cart'
-					className='cart'
-					openModal={openCartModal}
-					onCloseModal={handleCloseCart}
-					buttonText='Go to Checkout'
-					onCtaClick={handleOpenCheckoutModal}
-				>
-					<Cart />
-				</Modal>,
-				document.getElementById('modal')
-			)}
+			{openCartModal &&
+				createPortal(
+					<Modal
+						label='Your Cart'
+						className='cart'
+						openModal={openCartModal}
+						onCloseModal={handleCloseCart}
+						buttonText='Go to Checkout'
+						onCtaClick={handleOpenCheckoutModal}
+						modalActions={true}
+					>
+						<Cart />
+					</Modal>,
+					document.getElementById('modal')
+				)}
 
-			{createPortal(
-				<Modal
-					label='Checkout'
-					openModal={openCheckoutModal}
-					onCloseModal={handleCloseCheckoutModal}
-					buttonText='Submit order'
-				>
-					<CheckoutForm />
-				</Modal>,
-				document.getElementById('modal')
-			)}
+			{openCheckoutModal &&
+				createPortal(
+					<Modal
+						label='Checkout'
+						openModal={openCheckoutModal}
+						onCloseModal={handleCloseCheckoutModal}
+						buttonText='Submit order'
+						modalActions={false}
+					>
+						<CheckoutForm />
+					</Modal>,
+					document.getElementById('modal')
+				)}
 		</CartProvider>
 	);
 }

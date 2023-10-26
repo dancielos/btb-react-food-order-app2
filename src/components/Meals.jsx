@@ -13,7 +13,7 @@ const Meals = function (props) {
 
 	const cartCtx = useContext(CartContext);
 
-	console.log(cartCtx);
+	// console.log(cartCtx);
 
 	return (
 		<section>
